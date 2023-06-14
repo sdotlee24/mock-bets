@@ -1,0 +1,147 @@
+body {
+    margin: 0;
+}
+
+.App {
+    width: 100%;
+}
+.bet-item {
+    display: grid;
+    align-items: center;
+    grid-template-columns: 2fr 1fr;
+    grid-template-rows: 1fr 20fr;
+    gap: 0;
+    width: 200px;
+    height: 200px;
+    
+  }
+  
+ .date {
+    grid-column: span 2;
+    text-align: center;
+    color: white;
+    background-color: black;
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+ }
+ .dateItem {
+    margin-bottom: 10px !important;
+    margin-top: 5px;
+    font-size: 24px;
+ }
+
+ .box {
+    
+    background-color: rgb(235, 228, 228);
+ }
+
+.team {
+    font-size: 30px;
+}
+.odds {
+    display: block;
+    justify-content: center; /* Horizontal center alignment */
+    align-items: center; /* Vertical center alignment */
+    font-size: 40px;
+    padding-top: 1px;
+    padding-bottom: 1px;
+}
+.btn {
+    width: 80px;
+}
+.logout {
+    display: inline-block;
+    color: white;
+    font-family:'Times New Roman', Times, serif;
+    font-weight: lighter;
+    margin-right: 30px;
+    
+}
+
+.nav {
+    font-size: 50px;
+    color: aliceblue;
+    margin-right: 200px;
+    margin-top: 45px;
+    text-decoration: none;
+    
+}
+
+.navbar {
+    background-color: rgb(69, 68, 68);
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 200px;
+    height: 180px;
+}
+.login {
+    padding: 15px 5px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+  }
+.login:focus {
+    outline: none;
+    border-color: rgb(8, 78, 184);
+  }
+.one {
+    margin-top: 20px;
+
+}
+
+
+
+.authUser {
+    display: flex;
+    align-items: flex-start;
+  }
+  
+  form {
+    display: flex;
+    flex-direction: column;
+  }
+.button-container {
+    display: flex;
+    flex-direction: column;
+    margin-left: 7px;
+    margin-top: 20px;
+  }
+  
+  .button-container button {
+    margin-bottom: 10px;
+  }
+
+.title {
+    
+    margin-right: 30px !important;
+    margin-left: 40px;
+    margin-top: 50px;
+
+}
+.seperate {
+    
+    background-color: rgb(137, 121, 102);
+    width: 5px;
+    margin-right: 100px;
+}
+
+.auth {
+    margin-left: auto !important;
+    margin-right: 30px;
+}
+
+.auth2 {
+    margin-top: 10px
+}
+
+.about {
+    font-size: 30px;
+    font-family:Arial, Helvetica, sans-serif;
+    margin: 0 200px;
+    
+}
+
+.about h1 {
+    text-align: center;
+}
