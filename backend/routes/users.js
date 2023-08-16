@@ -5,8 +5,10 @@ import {UserModel} from '../models/Users.js'
 const router = express.Router();
 
 router.post('/register', async(req, res) => {
-    
     const {username, password} = req.body;
+    if (!username || !password) {
+        return res.status(400).json({message: "Please enter username or password"})
+    }
     const user = await UserModel.findOne({ username });
     if (user) {
          return res.status(400).json({message: "Username already exists"});
@@ -22,6 +24,9 @@ router.post('/register', async(req, res) => {
 
 router.post("/login", async(req, res) => {
     const {username, password} = req.body;
+    if (!username || !password) {
+        return res.status(400).json({message: "Please enter username or password"})
+    }
     const user = await UserModel.findOne({ username });
     
     if (!user) {

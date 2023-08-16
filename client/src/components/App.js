@@ -2,8 +2,7 @@ import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { BetHistory } from "./BetHistory.js";
 import { Navbar } from "./Navbar.js";
-import Player from "./Player";
-import Auth from "./Auth";
+import { Sign } from "./Sign.js";
 import { About } from "./About.js";
 import Gamble from "./Gamble";
 import { useCookies } from "react-cookie";
@@ -37,6 +36,7 @@ function App() {
           <Route path="/" element={<Gamble />} />
           <Route path="/history" element={cookies.access_token &&<BetHistory />} />
           <Route path="/about" element={<About />} />
+          <Route path="/sign-in" element={<Sign />} />
         </Routes>
       </Router>
       

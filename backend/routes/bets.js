@@ -8,7 +8,7 @@ const router = express.Router();
 
 export const getBets = () => {
     const url = "https://api.the-odds-api.com/v4/sports/basketball_nba/odds";
-    const apiKey = process.env.API_KEY; //save this into a .env file later on
+    const apiKey = process.env.API_KEY; 
     axios.get(url, {
         params: {
             apiKey: apiKey,

@@ -3,11 +3,17 @@ import ejs from 'ejs'
 import https from 'https'
 import mongoose from 'mongoose'
 import {UserRouter} from './routes/users.js'
-import { betRouter, getBets, getResults } from './routes/bets.js' //call getBets every 24hrs
+import { betRouter, getBets } from './routes/bets.js' //call getBets every 24hrs
 import cron from 'node-cron'
+import { Strategy as GoogleStrategy } from 'passport-google-oauth20';
+import passport from 'passport'
+import session from 'express-session'
+
 const app = express();
 app.use(express.urlencoded());
 app.use(express.json());
+// app.use(passport.initialize());
+// app.use(passport.session());
 app.use((req, res, next) => {
     res.setHeader("Access-Control-Allow-Origin", "*");
     res.header(
@@ -21,7 +27,10 @@ app.use("/bet", betRouter) //we are going to be writing code for all endpoints r
 // and we import the function as userRouter
 
 app.set('view engine', 'ejs');
-mongoose.connect("mongodb://localhost:27017/nbaDB");
+
+
+
+mongoose.connect(process.env.ATLAS);
 
 const PORT = process.env.PORT || 8000;
 const playerSchema = new mongoose.Schema({
