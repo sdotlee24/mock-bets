@@ -1,5 +1,4 @@
 import express from 'express'
-import ejs from 'ejs'
 import https from 'https'
 import mongoose from 'mongoose'
 import {UserRouter} from './routes/users.js'
