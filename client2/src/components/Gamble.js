@@ -9,7 +9,7 @@ function Gamble() {
   const [cookies, setCookies] = useCookies(["access_token"]);
   const isAuthenticated = !!cookies.access_token;
   //shows user the Gambling page if they are authenticated, shows a blank screen if else:
-  return <div className="about"><h1>Available bets</h1>{isAuthenticated && <Stats />}</div>
+  return <div className="about"><h1 className="title">Available bets</h1>{isAuthenticated && <Stats />}</div>
   
 }
 
@@ -39,17 +39,17 @@ const Stats = () => {
   return (
     <div>
       {betData.map((obj, index) => (
-        <div className="bet-item" key={index}>
-        <div className="date">
+        <div className="bet-history" key={index}>
+        <div className="date x">
           <p className="dateItem">{obj.date}</p>
           </div>
-          <div className="box team">
+          <div className="teams x">
             <p>{obj.teamOne}</p>
             <p>{obj.teamTwo}</p>
           </div>
-          <div className="box odds">
-            <Button onClick={() => saveBet(obj.teamOne, obj._id)} className="btn" variant="contained"><p>{obj.oneOdds}</p></Button>
-            <Button onClick={() => saveBet(obj.teamTwo, obj._id)} className="btn" variant="contained"><p>{obj.twoOdds}</p></Button>
+          <div className="x odds">
+            <p onClick={() => saveBet(obj.teamOne, obj._id)} className="team-odd">{obj.oneOdds}</p>
+            <p onClick={() => saveBet(obj.teamTwo, obj._id)} className="team-odd">{obj.twoOdds}</p>
           </div>
         </div>
       ))}

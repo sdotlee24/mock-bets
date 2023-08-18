@@ -1,8 +1,8 @@
 import express from 'express'
-import mongoose from 'mongoose'
 import { BetModel } from "../models/Bets.js";
 import { UserModel } from '../models/Users.js';
-import axios from 'axios'
+import mongoose from 'mongoose';
+import axios from 'axios';
 import 'dotenv/config'
 const router = express.Router();
 
@@ -24,10 +24,8 @@ export const getBets = () => {
             const [outcome1, outcome2] = outcomes;
             const pointOne = outcome1.point;
             const pointTwo = outcome2.point;
-            const firstTeam = outcome1.name;
-            const secondTeam = outcome2.name;
-            const first = firstTeam.split(" ")[1];
-            const second = secondTeam.split(" ")[1];
+            const first = outcome1.name;
+            const second = outcome2.name;
             const unixD = new Date(commence_time);
             const unixTime = Math.floor(unixD.getTime()/1000);
             const formatedTime = commence_time.split("T")[0];
@@ -62,7 +60,6 @@ export const getBets = () => {
     })
     .catch(err => console.log(err));
 }
-
 //choice: call nbastats api every time endpoint is called vs call nbastats api once every day after all games are over, and then store into database
 //and then query database for info
 export const getResults = async() => {
@@ -174,15 +171,39 @@ router.post("/post/:team/:id/:userID", async(req, res) => {
                 break;
             }
         }
+        //we dont want the user to be able to UPDATE their selection at any given point
         if (!found) {
             const usera = await UserModel.findByIdAndUpdate(req.params.userID, {$push: {betLog: newSlip}});
-        //make it so that user cant spam click the button -> it pushes more betSLips to the array
         }
     } catch (err) {
 
         res.json(err);
     }
     
+})
+
+
+router.delete("/betLogs/:userID/:index", async (req, res) => {
+    const userID = req.params.userID;
+    console.log(userID);
+    const i = parseInt(req.params.index)
+    console.log(i);
+    try {
+        const user = await UserModel.findById(req.params.userID);
+        const { betLog } = user;
+        const ObjectId = mongoose.Types.ObjectId;
+        if (i < betLog.length) {
+            betLog.splice(i, 1);
+            console.log(betLog);
+            await UserModel.findOneAndUpdate({_id: new ObjectId(userID)}, {$set: {betLog}});
+            res.json({message: "Delete Success!"});
+        }
+     
+    } catch (err) {
+        console.log(err);
+        res.json({message: "Delete Failure!"});
+    }
+
 })
 
 

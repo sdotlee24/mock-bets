@@ -1,16 +1,24 @@
 import React from "react";
 import axios from "axios";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useCookies } from "react-cookie";
 import { useNavigate } from 'react-router-dom'
 import GoogleIcon from '@mui/icons-material/Google';
-
+import { GoogleLogin } from '@react-oauth/google';
 export const Sign = () => {
     const [userInfo, setUser] = useState({
         username: "",
         password: "",
       });
     const navigate = useNavigate();
+    const signInBtn = useRef(null);
+    //case where user presses "enter" to sign in
+    const handleKeyPress = event => {
+      if (event.key == "Enter") {
+        event.preventDefault();
+        signInBtn.current.click()
+      }
+    }
 
       const [errMsg, setMsg] = useState("-");
       const [username, setUsername] = useState("");
@@ -34,6 +42,7 @@ export const Sign = () => {
             .post(url + "register", { username, password })
             .then((res) => {
               console.log(res.message);
+              setMsg(res.data.message);
                 
             })
             .catch((err) => {
@@ -56,7 +65,16 @@ export const Sign = () => {
         setUser({ username: "", password: "" });
         setMsg("-");
       };
-    
+      const handleLogin = async () => {
+        try {
+          const response = await axios.get("http://localhost:8000/auth/google");
+          const authToken = response.data.token;
+          console.log(authToken);
+        } catch (err) {
+          console.log(err);
+        }
+      }
+
       return (
         <div className="login-form">
           <form >
@@ -77,6 +95,7 @@ export const Sign = () => {
                 <input
                 type="password"
                 name="password"
+                onKeyDown={handleKeyPress}
                 className="login two"
                 onChange={onChange}
                 value={userInfo.password}
@@ -85,11 +104,19 @@ export const Sign = () => {
               </div>
             </div>
             <p className="err">{errMsg}</p>
-            <p className="oauth">- or login with -</p>
-            <GoogleIcon className="oauth2" fontSize="large" style={{marginBottom: "12px"}}/>
+            {/* <p className="oauth">- or login with -</p>
+            <GoogleIcon className="oauth2" fontSize="large" style={{marginBottom: "12px"}} onClick={() => {
+              // window.location.href = process.env.REACT_APP_BACKEND_URL + '/auth/google';
+              //Replace URL with env varaible. However, there are some rules in react:
+              //Must start with REACT_APP_NAME
+              //THEN THIS IS EMBEDDED AFTER WE RUN "npm run build".
+              // window.location.href = 'http://localhost:8000/auth/google'
+              handleLogin()
+            }}/> */}
+
             <div className="action">
               <button onClick={onButton} name="register">Register</button>
-              <button onClick={onButton} name="login">Sign in</button>
+              <button onClick={onButton} name="login" ref={signInBtn}>Sign in</button>
             </div>
             </form>
         </div>

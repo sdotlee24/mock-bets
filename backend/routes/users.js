@@ -37,7 +37,7 @@ router.post("/login", async(req, res) => {
         return res.status(400).json({message: "Username/Password invalid"});
     }
     
-    const token = jwt.sign({id: user._id}, "secret")
+    const token = jwt.sign({id: user._id}, process.env.key)
     res.json({token, userID: user._id})
 })
 export {router as UserRouter};

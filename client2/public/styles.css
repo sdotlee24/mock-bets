@@ -1,50 +1,73 @@
 body {
     margin: 0;
+    background-color: #f8f6f6;
 }
 
 .App {
     width: 100%;
 }
-.bet-item {
-    display: grid;
-    align-items: center;
-    grid-template-columns: 2fr 1fr;
-    grid-template-rows: 1fr 20fr;
-    gap: 0;
-    width: 200px;
-    height: 200px;
-    
-  }
-  
- .date {
-    grid-column: span 2;
+
+.bet-history {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 40px;
+}
+
+.date {
+    flex: 1;
     text-align: center;
-    color: white;
-    background-color: black;
     margin-bottom: 0px;
     padding-bottom: 0px;
- }
- .dateItem {
-    margin-bottom: 10px !important;
-    margin-top: 5px;
-    font-size: 24px;
- }
-
- .box {
+    display: grid;
+    place-items: center;
     
-    background-color: rgb(235, 228, 228);
+ }
+.dateItem {
+  font-size: 24px;
  }
 
-.team {
+.box {
+  background-color: rgb(235, 228, 228);
+}
+
+.x {
+  border: 1px solid black;
+  background-color: rgb(128, 128, 129);
+  text-align: center;
+}
+
+.team-odd {
+  padding: 10px 20px;
+  margin: 0px;
+  border: 1px solid black;
+}
+
+.team-odd:hover {
+  background-color: aqua;
+}
+
+.teams {
+    flex: 3;
+    display: flex;
+    flex-direction: column;
     font-size: 30px;
 }
+
+.teams > p {
+  color: pink;
+  flex: 1;
+  margin: 0px;
+  border: 1px solid black; 
+
+}
+
 .odds {
+    flex: 1;
     display: block;
-    justify-content: center; /* Horizontal center alignment */
-    align-items: center; /* Vertical center alignment */
+    justify-content: center; 
+    align-items: center; 
     font-size: 40px;
-    padding-top: 1px;
-    padding-bottom: 1px;
+
 }
 .btn {
     width: 80px;
@@ -71,7 +94,7 @@ body {
     background-color: rgb(69, 68, 68);
     display: flex;
     justify-content: center;
-    margin-bottom: 200px;
+    margin-bottom: 30px;
    
 }
 .sign {
@@ -148,15 +171,22 @@ body {
     margin-top: 10px
 }
 
+.desc {
+  color: black;
+}
+
 .about {
     font-size: 30px;
     font-family:Arial, Helvetica, sans-serif;
-    margin: 0 200px;
-    
+    margin: 0 400px;
+    color: whitesmoke; 
 }
 
 .about h1 {
     text-align: center;
+    color: black;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: bold;
 }
 
 .err {
@@ -178,6 +208,11 @@ body {
     margin-bottom: 12px;
 }
 
+.title {
+  color: rgba(0, 0, 0, 0.916);
+  font-family: 'Times New Roman', Times, serif;
+  
+}
 .id {
   text-align: center;
   font-size: 15px;

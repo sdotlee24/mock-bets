@@ -2,10 +2,10 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useGetUserID } from "../hooks/useGetUserID.js";
 import CheckIcon from '@mui/icons-material/Check';
-import { useNavigate } from "react-router-dom";
+
 export const BetHistory = () => {
-  const navigate = useNavigate();
   const [betLogs, setBetLogs] = useState([{}]);
+  
   useEffect(() => {
     const fetchBetLogs = async () => {
       try {
@@ -19,32 +19,48 @@ export const BetHistory = () => {
     fetchBetLogs();
   }, []);
   
+  const DeleteBet = async (index) => {
+    //remove bet from screen
+    const tempLogs = [...betLogs];
+    console.log(index);
+    tempLogs.splice(index, 1);
+    setBetLogs(tempLogs);
+    //remove bet from db
+    const getUserID = useGetUserID();
+    try {
+      const delBet = await axios.delete(`http://localhost:8000/bet/betLogs/${getUserID}/${index}`);
+
+    } catch (err) {
+      console.log(err);
+    }
+  }
 
   return (
-    <div>
-        <h1 className="about">Bet History</h1>
+    <div className="about">
+        <h1 className="title">Bet History</h1>
       {betLogs ? (
         <div>
           {betLogs.map((obj, index) => (
-
-
-            <div className="bet-item" key={index}>              
-              {obj.status !== "TBD" && <div className="bet-item"><div className="date">
+            <div className={`bet-history ${obj.status === "TBD" && "not-complete"}`} key={index} onClick={obj.status === 'TBD' ? () => DeleteBet(index) : null}>
+              <div className="date x">
                 <p className="dateItem">{obj.date}</p>
-              </div><div className="box team" style={{backgroundColor: obj.status === "WON"? 'green':'red'}}>
-                <p>{obj.teamOne}{obj.teamOne == obj.pickedTeam && <CheckIcon />}</p>
-                <p>{obj.teamTwo}{obj.teamTwo == obj.pickedTeam && <CheckIcon />}</p>
-                
               </div>
-              <div className="box odds" style={{backgroundColor: obj.status === "WON"? 'green':'red'}}>
+              <div className="teams x">
+                <p>{obj.teamOne}{obj.teamOne == obj.pickedTeam && <CheckIcon />}</p>
+                <p>{obj.teamTwo}{obj.teamTwo == obj.pickedTeam && <CheckIcon />}</p>      
+              </div>
+              <div className="x odds">
                 <p>{obj.oneOdds}</p>
                 <p>{obj.twoOdds}</p>
-              </div></div>}
+              </div>
+              <div className="x">
+                <p style={{backgroundColor: obj.status === "WON" ? 'green': obj.status === "LOST"? 'red': 'white'}}>{obj.status}</p>
+              </div>   
             </div>
         ))}
         </div>
       ) : (
-        <h1>Loading...</h1>
+        <h1>No Bets</h1>
       )}
     </div>
   );
