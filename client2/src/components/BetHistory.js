@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useGetUserID } from "../hooks/useGetUserID.js";
 import CheckIcon from '@mui/icons-material/Check';
-import 'dotenv/config';
 
 export const BetHistory = () => {
   const [betLogs, setBetLogs] = useState([{}]);
@@ -29,7 +28,7 @@ export const BetHistory = () => {
     //remove bet from db
     const getUserID = useGetUserID();
     try {
-      const delBet = await axios.delete(process.env.REACT_APP_BACKEND_URL + `/bet/betLogs/${getUserID}/${index}`);
+      const delBet = await axios.delete(`https://mock-bets.onrender.com/bet/betLogs/${getUserID}/${index}`);
 
     } catch (err) {
       console.log(err);
@@ -71,7 +70,7 @@ export const BetHistory = () => {
 
 const GetBetLogs = async () => {
   const getUserID = useGetUserID();
-  const bet = await axios.get(process.env.REACT_APP_BACKEND_URL + `/bet/history/${getUserID}`);
+  const bet = await axios.get(`https://mock-bets.onrender.com/bet/history/${getUserID}`);
   const bets = bet.data;
   if (bets) {
     

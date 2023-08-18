@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useCookies } from "react-cookie";
 import { useGetUserID } from "../hooks/useGetUserID.js";
-import 'dotenv/config';
+
 
 function Gamble() {
   const [cookies, setCookies] = useCookies(["access_token"]);
@@ -18,7 +18,7 @@ const Stats = () => {
   const getUserID = useGetUserID();
   useEffect(() => {
     axios
-      .get(process.env.REACT_APP_BACKEND_URL + "/bet/all")
+      .get("https://mock-bets.onrender.com/bet/all")
       .then((res) => {
         console.log(res.data);
         setData(res.data);
@@ -28,7 +28,7 @@ const Stats = () => {
   const saveBet = (team, id) => {
     //get original bet slip from db and change status to the team you picked
     console.log(team, id);
-    axios.post(process.env.REACT_APP_BACKEND_URL + `/bet/post/${team}/${id}/${getUserID}`)
+    axios.post(`https://mock-bets.onrender.com/bet/post/${team}/${id}/${getUserID}`)
     .then(res => {
 
     })
