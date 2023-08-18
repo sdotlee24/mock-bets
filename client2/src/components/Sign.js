@@ -3,8 +3,8 @@ import axios from "axios";
 import { useState, useRef } from "react";
 import { useCookies } from "react-cookie";
 import { useNavigate } from 'react-router-dom'
-import GoogleIcon from '@mui/icons-material/Google';
-import { GoogleLogin } from '@react-oauth/google';
+// import GoogleIcon from '@mui/icons-material/Google';
+// import { GoogleLogin } from '@react-oauth/google';
 export const Sign = () => {
     const [userInfo, setUser] = useState({
         username: "",
@@ -14,7 +14,7 @@ export const Sign = () => {
     const signInBtn = useRef(null);
     //case where user presses "enter" to sign in
     const handleKeyPress = event => {
-      if (event.key == "Enter") {
+      if (event.key === "Enter") {
         event.preventDefault();
         signInBtn.current.click()
       }
@@ -22,7 +22,9 @@ export const Sign = () => {
 
       const [errMsg, setMsg] = useState("-");
       const [username, setUsername] = useState("");
+      console.log(username);
       const [_, setCookies] = useCookies(["access_token"]);
+      console.log(_);
       const onChange = (event) => {
         const { name, value } = event.target;
         setUser((prevUser) => {
@@ -65,15 +67,15 @@ export const Sign = () => {
         setUser({ username: "", password: "" });
         setMsg("-");
       };
-      const handleLogin = async () => {
-        try {
-          const response = await axios.get("https://mock-bets.onrender.com/auth/google");
-          const authToken = response.data.token;
-          console.log(authToken);
-        } catch (err) {
-          console.log(err);
-        }
-      }
+      // const handleLogin = async () => {
+      //   try {
+      //     const response = await axios.get("https://mock-bets.onrender.com/auth/google");
+      //     const authToken = response.data.token;
+      //     console.log(authToken);
+      //   } catch (err) {
+      //     console.log(err);
+      //   }
+      // }
 
       return (
         <div className="login-form">

@@ -28,8 +28,8 @@ export const BetHistory = () => {
     //remove bet from db
     const getUserID = useGetUserID();
     try {
-      const delBet = await axios.delete(`https://mock-bets.onrender.com/bet/betLogs/${getUserID}/${index}`);
-
+      await axios.delete(`https://mock-bets.onrender.com/bet/betLogs/${getUserID}/${index}`);
+      
     } catch (err) {
       console.log(err);
     }
@@ -46,8 +46,8 @@ export const BetHistory = () => {
                 <p className="dateItem">{obj.date}</p>
               </div>
               <div className="teams x">
-                <p>{obj.teamOne}{obj.teamOne == obj.pickedTeam && <CheckIcon />}</p>
-                <p>{obj.teamTwo}{obj.teamTwo == obj.pickedTeam && <CheckIcon />}</p>      
+                <p>{obj.teamOne}{obj.teamOne === obj.pickedTeam && <CheckIcon />}</p>
+                <p>{obj.teamTwo}{obj.teamTwo === obj.pickedTeam && <CheckIcon />}</p>      
               </div>
               <div className="odds x">
                 <p>{obj.oneOdds}</p>

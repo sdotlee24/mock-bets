@@ -5,7 +5,7 @@ import { useGetUserID } from "../hooks/useGetUserID.js";
 
 
 function Gamble() {
-  const [cookies, setCookies] = useCookies(["access_token"]);
+  const [cookies] = useCookies(["access_token"]);
   const isAuthenticated = !!cookies.access_token;
   //shows user the Gambling page if they are authenticated, shows a blank screen if else:
   return <div className="about"><h1 className="title">Available bets</h1>{isAuthenticated && <Stats />}</div>

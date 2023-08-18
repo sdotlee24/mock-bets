@@ -18,6 +18,7 @@ function App() {
       })
       .then((data) => setPlayers(data))
       .catch((err) => {
+        console.log(players);
         console.log(err);
       });
   }, []);

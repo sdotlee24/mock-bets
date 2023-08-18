@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom'
 import { useCookies } from 'react-cookie'
 // import logo from '../images/Drawing-2.png'
 export const Navbar = () => {
-    const [cookies, setCookies] = useCookies(["access_token"]);
+    const [cookies] = useCookies(["access_token"]);
 
 
     return (<div className='navbar navbar-expand navbar-dark bg-dark'>

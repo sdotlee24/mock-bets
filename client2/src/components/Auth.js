@@ -9,14 +9,12 @@ import { useNavigate } from "react-router-dom";
 const Auth = () => {
   const [cookies, setCookies] = useCookies(["access_token"]);
 
-  const [username, setUsername] = useState("hi");
   const navigate = useNavigate();
   const logout = () => {
     navigate("/");
     setCookies("access_token", "");
     window.localStorage.removeItem("userID");
     window.localStorage.removeItem("username");
-    setUsername("");
 
   };
   return (
