@@ -5,6 +5,7 @@ import { useCookies } from "react-cookie";
 import { useNavigate } from 'react-router-dom'
 import GoogleIcon from '@mui/icons-material/Google';
 import { GoogleLogin } from '@react-oauth/google';
+import 'dotenv/config';
 export const Sign = () => {
     const [userInfo, setUser] = useState({
         username: "",
@@ -36,7 +37,7 @@ export const Sign = () => {
         event.preventDefault();
         const name = event.target.name;
         const { username, password } = userInfo;
-        const url = "http://localhost:8000/auth/";
+        const url = process.env.REACT_APP_BACKEND_URL + "/auth/";
         if (name === "register") {
           axios
             .post(url + "register", { username, password })
@@ -67,7 +68,7 @@ export const Sign = () => {
       };
       const handleLogin = async () => {
         try {
-          const response = await axios.get("http://localhost:8000/auth/google");
+          const response = await axios.get(process.env.REACT_APP_BACKEND_URL + "/auth/google");
           const authToken = response.data.token;
           console.log(authToken);
         } catch (err) {
