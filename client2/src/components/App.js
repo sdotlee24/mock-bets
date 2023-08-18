@@ -9,7 +9,7 @@ import Gamble from "./Gamble";
 import { useCookies } from "react-cookie";
 function App() {
   const [players, setPlayers] = useState([]);
-  const [cookies, setCookies] = useCookies(["access_token"]);
+  const [cookies] = useCookies(["access_token"]);
   useEffect(() => {
     fetch("http://localhost:8000/players/")
       .then((res) => res.json())
@@ -21,7 +21,7 @@ function App() {
         console.log(players);
         console.log(err);
       });
-  }, []);
+  }, [players]);
 
   return (
     <div className="App">
