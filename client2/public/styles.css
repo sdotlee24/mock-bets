@@ -46,6 +46,11 @@ body {
   background-color: aqua;
 }
 
+.team-odd:active {
+  border: 2px solid salmon;
+  animation: pulse 0.3s ease none;
+}
+
 .teams {
     flex: 3;
     display: flex;
@@ -59,6 +64,16 @@ body {
   margin: 0px;
   border: 1px solid black; 
 
+}
+
+.result {
+  display: flex;
+  flex-direction: column;
+}
+
+.result > p {
+  flex: 1;
+  margin: 0px;
 }
 
 .odds {
@@ -315,4 +330,24 @@ body {
   }
   .login-form .action button:nth-child(2):hover {
     background: #3c4d6d;
+  }
+
+  .delete {
+    background-color: red;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .delete:active {
+    order: 2px solid salmon;
+    animation: pulse 0.3s ease none;
+  }
+  @keyframes pulse {
+    0% {
+      transform: scale(1);
+    }
+    100% {
+      transform: scale(1.1);
+    }
+  
   }

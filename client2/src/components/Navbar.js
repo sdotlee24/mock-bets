@@ -22,6 +22,9 @@ export const Navbar = () => {
             <li className='nav-item'>
                 {cookies.access_token && <Link to="/history" className='nav-link'>Bet History</Link>}
             </li>
+            <li className='nav-item'>
+                {cookies.access_token && <Link to="/stats" className='nav-link'>Stats</Link>}
+            </li>
             
         </ul>
     

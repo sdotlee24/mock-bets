@@ -4,6 +4,7 @@ import { BetHistory } from "./BetHistory.js";
 import { Navbar } from "./Navbar.js";
 import { Sign } from "./Sign.js";
 import { About } from "./About.js";
+import { Stats } from "./Stats.js";
 import Gamble from "./Gamble";
 import { useCookies } from "react-cookie";
 function App() {
@@ -37,6 +38,7 @@ function App() {
           <Route path="/history" element={cookies.access_token &&<BetHistory />} />
           <Route path="/about" element={<About />} />
           <Route path="/sign-in" element={<Sign />} />
+          <Route path="/stats" element={<Stats />} />
         </Routes>
       </Router>
       

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useCookies } from "react-cookie";
-import Button from "@mui/material/Button";
 import { useGetUserID } from "../hooks/useGetUserID.js";
 
 
@@ -48,8 +47,8 @@ const Stats = () => {
             <p>{obj.teamTwo}</p>
           </div>
           <div className="x odds">
-            <p onClick={() => saveBet(obj.teamOne, obj._id)} className="team-odd">{obj.oneOdds}</p>
-            <p onClick={() => saveBet(obj.teamTwo, obj._id)} className="team-odd">{obj.twoOdds}</p>
+            <p onMouseUp={() => saveBet(obj.teamOne, obj._id)} className="team-odd">{obj.oneOdds}</p>
+            <p onMouseUp={() => saveBet(obj.teamTwo, obj._id)} className="team-odd">{obj.twoOdds}</p>
           </div>
         </div>
       ))}
